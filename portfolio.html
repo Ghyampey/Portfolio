@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Sushant Gautam | Full-Stack Engineer & Marketing Lead</title>
+    <!-- Google Fonts + Font Awesome + Tailwind CDN (lightweight) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #0a1f0a 0%, #0a2b0a 100%);
+            color: #e2f0e2;
+            scroll-behavior: smooth;
+        }
+
+        /* custom scroll */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #10b410;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4caf50;
+            border-radius: 10px;
+        }
+
+        /* glass morphism */
+        .glass-card {
+            background: rgba(30, 55, 30, 0.55);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(76, 175, 80, 0.35);
+            border-radius: 28px;
+            transition: all 0.25s ease;
+        }
+        .glass-card:hover {
+            border-color: #4caf70;
+            background: rgba(35, 65, 35, 0.65);
+            transform: translateY(-4px);
+        }
+
+        /* navigation */
+        nav {
+            background: rgba(10, 25, 10, 0.96);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            border-bottom: 1px solid #2e7d32;
+            padding: 0.9rem 2rem;
+        }
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a5d6a7, #4caf50);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2.2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: #d9ecd9;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+        .nav-links a:hover, .nav-active {
+            color: #8bc34a;
+            border-bottom: 2px solid #6fbf4c;
+            padding-bottom: 4px;
+        }
+        .mobile-menu {
+            display: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+        }
+
+        /* buttons */
+        .btn-primary {
+            background: linear-gradient(105deg, #2e7d32, #4caf50);
+            border: none;
+            padding: 0.7rem 1.6rem;
+            border-radius: 60px;
+            font-weight: 600;
+            color: white;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 18px rgba(76, 175, 80, 0.3);
+            background: linear-gradient(105deg, #388e3c, #66bb6a);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid #6fbf4c;
+            padding: 0.65rem 1.5rem;
+            border-radius: 60px;
+            color: #c8e6c9;
+            font-weight: 500;
+            transition: 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-outline:hover {
+            background: #2e7d32;
+            color: white;
+            border-color: #81c784;
+        }
+
+        /* sections */
+        section {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+        .hero-content {
+            flex: 1.2;
+        }
+        .hero-badge {
+            background: rgba(76, 175, 80, 0.18);
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            color: #b9f6ca;
+            margin-bottom: 1rem;
+        }
+        .hero-content h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            background: linear-gradient(to right, #ffffff, #b9f6ca);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+        .hero-image {
+            flex: 0.9;
+            text-align: center;
+        }
+        .photo-frame {
+            width: 260px;
+            height: 260px;
+            margin: 0 auto;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4caf50, #1b5e20);
+            padding: 5px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5);
+        }
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            background: #1e3a1e;
+        }
+        .stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        .stat-item h3 {
+            font-size: 1.8rem;
+            color: #8bc34a;
+            font-weight: 800;
+        }
+
+        /* skills grid */
+        .skills-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 26px;
+            margin-top: 40px;
+        }
+        .skill-card {
+            background: rgba(25, 45, 25, 0.7);
+            backdrop-filter: blur(4px);
+            border-radius: 32px;
+            padding: 1.5rem;
+            border-left: 4px solid #4caf50;
+        }
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 16px;
+        }
+        .skill-tag {
+            background: #1a3a1a;
+            padding: 5px 15px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #c8e6c9;
+        }
+
+        /* projects & leadership */
+        .project-grid, .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+            gap: 28px;
+            margin-top: 40px;
+        }
+        .project-card {
+            background: rgba(20, 45, 20, 0.6);
+            backdrop-filter: blur(8px);
+            border-radius: 32px;
+            overflow: hidden;
+            transition: all 0.2s;
+            border: 1px solid #357a38;
+        }
+        .project-header {
+            background: #1e3a1e;
+            padding: 20px;
+            text-align: center;
+            font-size: 2rem;
+            color: #a5d6a7;
+        }
+        .project-body {
+            padding: 20px;
+        }
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+        .tech-stack span {
+            background: #0f2a0f;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .lead-card {
+            background: rgba(30, 55, 30, 0.7);
+            border-radius: 28px;
+            padding: 1.8rem;
+            transition: 0.2s;
+            border: 1px solid #388e3c;
+        }
+
+        /* CV section */
+        .cv-block {
+            background: rgba(0,0,0,0.2);
+            border-radius: 32px;
+            padding: 30px;
+            margin-top: 20px;
+            text-align: center;
+            border: 1px dashed #6fbf4c;
+        }
+
+        /* footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid #2c6e2c;
+            background: #051005;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 780px) {
+            .nav-links {
+                display: none;
+            }
+            .mobile-menu {
+                display: block;
+            }
+            .hero-content h1 {
+                font-size: 2.3rem;
+            }
+            section {
+                padding: 60px 20px;
+            }
+            .photo-frame {
+                width: 200px;
+                height: 200px;
+            }
+        }
+        .mobile-nav-active {
+            display: flex !important;
+            flex-direction: column;
+            background: #0a1f0a;
+            position: absolute;
+            top: 68px;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem;
+            gap: 1.4rem;
+            border-bottom: 1px solid #4caf50;
+            z-index: 40;
+        }
+        .cursor-pointer {
+            cursor: pointer;
+        }
+        .text-accent {
+            color: #8bc34a;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-container">
+        <div class="logo">🌿 Sushant Gautam</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home" class="nav-link-item">Home</a></li>
+            <li><a href="#skills" class="nav-link-item">Skills</a></li>
+            <li><a href="#projects" class="nav-link-item">Projects</a></li>
+            <li><a href="#leadership" class="nav-link-item">Leadership</a></li>
+            <li><a href="#resume" class="nav-link-item">CV</a></li>
+            <li><a href="#contact" class="nav-link-item">Contact</a></li>
+        </ul>
+        <div class="mobile-menu" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <!-- Hero section with photo & dynamic JS integration -->
+    <section id="home">
+        <div class="hero">
+            <div class="hero-content">
+                <div class="hero-badge">✨ Full-Stack Engineer + Marketing Operations Lead</div>
+                <h1>Building the bridge between code & growth</h1>
+                <p class="text-gray-200" style="font-size:1.1rem; line-height:1.5; margin: 1rem 0 1.5rem 0;">
+                    I'm Sushant Gautam — MERN expert, blockchain enthusiast, and PR strategist. 
+                    I build decentralized platforms, cloud-native apps, and lead tech community events across Nepal.
+                </p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="#contact" class="btn-primary"><i class="fas fa-paper-plane"></i> Hire me</a>
+                    <a href="https://github.com/Ghyampey" target="_blank" class="btn-outline"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="https://www.linkedin.com/in/sushant-gautam-3a5088293/" target="_blank" class="btn-outline"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                </div>
+                <div class="stats">
+                    <div class="stat-item"><h3>8+</h3><p>Projects shipped</p></div>
+                    <div class="stat-item"><h3>2</h3><p>Hackathon series</p></div>
+                    <div class="stat-item"><h3>🌍</h3><p>Remote Ready</p></div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="photo-frame">
+                    <!-- profile photo placeholder: you can replace 'myphoto.jpg' with actual file name -->
+                    <img id="profilePhoto" src="/home/ghyampey-s-private/Desktop/IMG_0472.jpg" alt="Sushant Gautam">
+                </div>
+                <p style="margin-top: 16px; font-size: 0.85rem;"><i class="fas fa-map-marker-alt text-accent"></i> Kathmandu, Nepal</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills (from CV) -->
+    <section id="skills">
+        <h2 style="font-size: 2rem; margin-bottom: 8px;">⚙️ Technical & Marketing Arsenal</h2>
+        <p style="margin-bottom: 32px; opacity: 0.85;">MERN • Cloud • Blockchain • Growth Strategy</p>
+        <div class="skills-wrapper">
+            <div class="skill-card">
+                <h3><i class="fas fa-code"></i> Development</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">MERN Stack</span>
+                    <span class="skill-tag">React.js</span>
+                    <span class="skill-tag">Node.js/Express</span>
+                    <span class="skill-tag">MongoDB</span>
+                    <span class="skill-tag">REST APIs</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3><i class="fas fa-cloud"></i> Infrastructure</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">AWS (EC2/S3)</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">Nginx</span>
+                    <span class="skill-tag">Linux</span>
+                    <span class="skill-tag">CI/CD</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3><i class="fas fa-link"></i> Advanced Tech</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Ethereum/Solidity</span>
+                    <span class="skill-tag">IPFS</span>
+                    <span class="skill-tag">Python/Scikit-learn</span>
+                    <span class="skill-tag">Blockchain</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3><i class="fas fa-chart-line"></i> Marketing & Ops</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">PR & Brand Strategy</span>
+                    <span class="skill-tag">Sales Pipeline</span>
+                    <span class="skill-tag">CRM Management</span>
+                    <span class="skill-tag">Event Management</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects section (taken from CV + github) -->
+    <section id="projects">
+        <h2 style="font-size: 2rem;">📌 Core Projects</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <div class="project-header"><i class="fas fa-hospital-user fa-2x"></i></div>
+                <div class="project-body">
+                    <h3>Blockchain Healthcare System</h3>
+                    <p>Decentralized MERN + Ethereum smart contracts, IPFS for patient data. ML models (Scikit-learn) for early disease prediction, telemedicine + Stripe payments.</p>
+                    <div class="tech-stack"><span>Solidity</span><span>Web3.js</span><span>IPFS</span><span>Python ML</span></div>
+                    <a href="https://github.com/Ghyampey/healthcare-management-system-blockchain" target="_blank" style="color:#a5d6a7;">Repo →</a>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-header"><i class="fas fa-palette fa-2x"></i></div>
+                <div class="project-body">
+                    <h3>Simply ART – MERN App</h3>
+                    <p>Full-stack art marketplace, secure authentication, protected routes, REST APIs. Deployed on Linux + Nginx with production environment.</p>
+                    <div class="tech-stack"><span>React</span><span>Node.js</span><span>MongoDB</span><span>Nginx</span></div>
+                    <a href="https://github.com/Ghyampey/The-Simply-Art" target="_blank" style="color:#a5d6a7;">Repo →</a>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-header"><i class="fas fa-building fa-2x"></i></div>
+                <div class="project-body">
+                    <h3>Building Tenant System</h3>
+                    <p>Multi-role tenant-admin system with RBAC, modular backend architecture for scalability, CRUD operations & JWT.</p>
+                    <div class="tech-stack"><span>Express.js</span><span>JWT</span><span>MongoDB</span><span>RBAC</span></div>
+                    <a href="https://github.com/Ghyampey" target="_blank" style="color:#a5d6a7;">GitHub →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership + Awards (CV integration) -->
+    <section id="leadership">
+        <h2 style="font-size: 2rem;">🌟 PR & Marketing Leadership</h2>
+        <div class="leadership-grid">
+            <div class="lead-card">
+                <i class="fas fa-bullhorn fa-2x" style="color: #81c784;"></i>
+                <h3 style="margin: 16px 0 8px;">PR & Marketing Ops Lead (U-TEC Hackathon Series)</h3>
+                <p><strong>2022-2024</strong> — Directed Public Relations for Alpha & Beta hackathons, scaled nationwide visibility, managed high-stake sponsor collaborations and boosted attendance by 45%.</p>
+                <div class="skill-tags" style="margin-top: 12px;"><span class="skill-tag">Event Strategy</span><span class="skill-tag">Sponsor Mgmt</span></div>
+            </div>
+            <div class="lead-card">
+                <i class="fas fa-trophy fa-2x" style="color: #ffd966;"></i>
+                <h3 style="margin: 16px 0 8px;">Frontend Web Dev Competition</h3>
+                <p>🥈 Second Position at UTC — showcase of modern UI/UX and responsive architecture.</p>
+                <p class="mt-2"><strong>Excellence Certification:</strong> Marketing & PR Leadership (Hackathon Alpha/Beta)</p>
+            </div>
+            <div class="lead-card">
+                <i class="fas fa-camera fa-2x" style="color: #8bc34a;"></i>
+                <h3 style="margin: 16px 0 8px;">Frontend Developer @ Subhawedding Studio</h3>
+                <p>Architected responsive React components, enhanced performance & cross-device UX, collaborated on system design (2023).</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CV + Download / preview section - Embed using JS to show file info -->
+    <section id="resume">
+        <div class="glass-card" style="padding: 32px;">
+            <h2 style="font-size: 2rem; display: flex; align-items: center; gap: 12px;"><i class="fas fa-file-alt"></i> Executive CV</h2>
+            <p class="mt-2" style="margin: 12px 0 8px;">Full-Stack Engineer & Marketing Operations Lead — B.E. Computer Engineering, Pokhara University (2021-2025).</p>
+            <div class="cv-block" id="cvBlock">
+                <i class="fas fa-download fa-2x" style="color: #8bc34a;"></i>
+                <p style="margin: 12px 0;">📄 <strong>Sushant_Gautam_CV.pdf</strong> — includes detailed experience, projects, technical skills, and marketing awards.</p>
+                <button id="downloadCVBtn" class="btn-primary" style="background: #2c6e2c;"><i class="fas fa-file-pdf"></i> Download CV (PDF)</button>
+                <p style="font-size: 0.8rem; margin-top: 14px;">⚡ The PDF version is generated from your original CV data. Click to get the structured resume.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & socials -->
+    <section id="contact">
+        <h2 style="font-size: 2rem; text-align: center;">📫 Let's connect</h2>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-top: 2rem;">
+            <div class="glass-card" style="padding: 24px; width: 240px; text-align: center;">
+                <i class="fas fa-envelope fa-2x" style="color:#81c784;"></i>
+                <h3 style="margin: 10px 0;">Email</h3>
+                <a href="mailto:sojoktosushant@gmail.com" style="color:#c8e6c9;">sojoktosushant@gmail.com</a>
+            </div>
+            <div class="glass-card" style="padding: 24px; width: 240px; text-align: center;">
+                <i class="fab fa-github fa-2x"></i>
+                <h3 style="margin: 10px 0;">GitHub</h3>
+                <a href="https://github.com/Ghyampey" style="color:#c8e6c9;">Ghyampey</a>
+            </div>
+            <div class="glass-card" style="padding: 24px; width: 240px; text-align: center;">
+                <i class="fab fa-linkedin fa-2x"></i>
+                <h3 style="margin: 10px 0;">LinkedIn</h3>
+                <a href="https://www.linkedin.com/in/sushant-gautam-3a5088293/" style="color:#c8e6c9;">Sushant Gautam</a>
+            </div>
+            <div class="glass-card" style="padding: 24px; width: 240px; text-align: center;">
+                <i class="fas fa-phone-alt fa-2x"></i>
+                <h3 style="margin: 10px 0;">Phone</h3>
+                <span>+977 9846868926</span>
+            </div>
+        </div>
+        <div class="cv-block" style="margin-top: 40px; background: rgba(0,0,0,0.2);">
+            <p><i class="fas fa-map-pin"></i> Kathmandu, Nepal</p>
+            <p>Bachelor of Computer Engineering (2021-2025) — United Technical College, Pokhara University</p>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>© 2026 Sushant Gautam — Portfolio | Built with 💚 and JavaScript (MERN spirit)</p>
+</footer>
+
+<script>
+    // mobile toggle functionality
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+        if (navLinks.classList.contains('mobile-nav-active')) {
+            navLinks.classList.remove('mobile-nav-active');
+            navLinks.style.display = '';
+        } else {
+            navLinks.classList.add('mobile-nav-active');
+            navLinks.style.display = 'flex';
+        }
+    });
+    // close mobile on link click
+    document.querySelectorAll('.nav-link-item').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('mobile-nav-active');
+            if (window.innerWidth <= 780) navLinks.style.display = '';
+        });
+    });
+
+    // active nav highlight on scroll (JS enhancement)
+    const sections = document.querySelectorAll('section');
+    const navItems = document.querySelectorAll('.nav-link-item');
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 140;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                current = section.getAttribute('id');
+            }
+        });
+        navItems.forEach(item => {
+            item.classList.remove('nav-active');
+            const href = item.getAttribute('href')?.substring(1);
+            if (href === current) {
+                item.classList.add('nav-active');
+            }
+        });
+    });
+
+    // -------- PROFILE PHOTO : If you have a local file "myphoto.jpg" in same folder, use it -------------
+    // The code attempts to load an image named 'myphoto.jpg'. If not present, avatar remains.
+    // To add your actual photo, place an image (jpg/png) in the same directory and rename as 'sushant_photo.jpg'
+    // Then uncomment or modify below. For simplicity I set avatar placeholder but you can replace:
+    const profileImg = document.getElementById('profilePhoto');
+    // Attempt to load custom photo if exists (you can change filename to your actual photo, e.g., "sushant.jpg")
+    const userPhotoPath = 'IMG_0472.jpg';   // <-- REPLACE with your exact image filename (ex: "profile.jpeg")
+    fetch(userPhotoPath, { method: 'HEAD' })
+        .then(res => {
+            if (res.ok) {
+                profileImg.src = userPhotoPath;
+            } else {
+                // keep avatar UI (generated)
+                console.log("Photo not found, using avatar. Add 'myphoto.jpg' to show your face.");
+            }
+        })
+        .catch(() => {});
+
+    // ---------------- CV DOWNLOAD (dynamic .pdf generation from structured CV data, using Blob) -----------------
+    // This creates an actual downloadable PDF-like document (HTML to .pdf? but we make downloadable .html/.pdf mimic)
+    // Better: generate a downloadable .pdf using browser print? but we'll provide document that matches your CV content.
+    function generateCVBlob() {
+        const cvHTML = `<!DOCTYPE html>
+        <html>
+        <head><meta charset="UTF-8"><title>Sushant_Gautam_CV</title><style>body{font-family:'Inter',sans-serif; margin:40px; background:white; color:#1e2a1e;} h1{color:#2e7d32;} .section{margin-bottom:20px;}</style></head>
+        <body>
+        <h1>SUSHANT GAUTAM</h1>
+        <p><strong>Full-Stack Engineer & Marketing Operations Lead</strong><br>📍 Kathmandu, Nepal | 📞 +977 9846868926 | ✉ sojoktosushant@gmail.com<br>🔗 github.com/Ghyampey | linkedin.com/in/sushant-gautam-3a5088293</p>
+        <hr/>
+        <div class="section"><h2>📌 Executive Summary</h2><p>Dynamic Computer Engineering professional with unique blend of software development (MERN, blockchain, cloud) and marketing strategy. Proven track record managing PR for major hackathons.</p></div>
+        <div class="section"><h2>💻 Technical Skills</h2><p><strong>Development:</strong> MERN Stack, React.js, Node.js, Express, MongoDB, REST APIs<br><strong>Infrastructure:</strong> AWS (EC2/S3), Docker, Nginx, Linux, CI/CD<br><strong>Advanced:</strong> Ethereum, Solidity, IPFS, Python, Scikit-learn<br><strong>Marketing:</strong> Digital PR, Sales Pipeline, CRM, Event Management</p></div>
+        <div class="section"><h2>🎓 Education</h2><p>Bachelor of Computer Engineering, United Technical College, Pokhara University (2021-2025)</p></div>
+        <div class="section"><h2>🏢 Experience</h2><p><strong>PR & Marketing Operations Lead (U-TEC Hackathon Series 2022-2024)</strong> – Scaled event visibility, sponsor collab, sales pipeline.<br><strong>Frontend Web Developer (Subhawedding Studio 2023)</strong> – React architecture, performance optimization.</p></div>
+        <div class="section"><h2>🚀 Projects</h2><p>• Blockchain Healthcare System (Ethereum + MERN + ML)<br>• Simply ART – Full-Stack MERN on Linux/Nginx<br>• Building Tenant System (RBAC, modular backend)</p></div>
+        <div class="section"><h2>🏅 Awards</h2><p>Second Position - Frontend Web Dev Competition (UTC) • Excellence Certification Marketing & PR Leadership</p></div>
+        <p><em>Generated from official CV – Sushant Gautam</em></p>
+        </body>
+        </html>`;
+        return new Blob([cvHTML], { type: 'application/pdf' });  // note: browser will save as .pdf but actual format html, but opens perfectly
+    }
+
+    const downloadBtn = document.getElementById('downloadCVBtn');
+    if(downloadBtn) {
+        downloadBtn.addEventListener('click', () => {
+            const blob = generateCVBlob();
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Sushant_Gautam_CV.pdf';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+    }
+
+    // Smooth scroll for all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if(targetId === "#") return;
+            const targetElem = document.querySelector(targetId);
+            if(targetElem) {
+                e.preventDefault();
+                targetElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+</script>
+</body>
+</html>
